@@ -8,6 +8,7 @@ public class Hero {
     private String heroPower;
     private String heroWeakness;
     private String avatarUrl;
+    private int id;
 
     public Hero(String heroName, int heroAge, String heroPower, String heroWeakness, String avatarUrl) {
         this.heroName = heroName;
@@ -70,5 +71,11 @@ public class Hero {
         this.avatarUrl = avatarUrl;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
