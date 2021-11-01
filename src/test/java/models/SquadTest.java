@@ -25,6 +25,12 @@ class SquadTest {
     }
 
     @Test
+    public void isMaxSizeInstantiatedAsAnInteger() throws Exception{
+        Squad squad = setupNewSquad();
+        assertEquals("Integer", ((Object)squad.getMaxSize()).getClass().getSimpleName());
+    }
+
+    @Test
     public void isSquadFullIsFalseAfterInstantiation() throws Exception{
         Squad squad = setupNewSquad();
         assertFalse(squad.isSquadFull());
