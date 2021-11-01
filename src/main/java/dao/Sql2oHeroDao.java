@@ -45,4 +45,31 @@ public class Sql2oHeroDao implements HeroDao {
                     .executeAndFetchFirst(Hero.class);
         }
     }
+
+    @Override
+    public void deleteHeroById(int id) {
+        String sql = "DELETE FROM heros WHERE id =:id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }catch (Sql2oException e){
+            System.out.println(e);
+        }
+
+    }
+
+    @Override
+    public void deleteAllHeros() {
+        String sql = "DELETE from heros";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .executeUpdate();
+        }catch(Sql2oException e){
+            System.out.println(e);
+        }
+
+    }
+
+
 }

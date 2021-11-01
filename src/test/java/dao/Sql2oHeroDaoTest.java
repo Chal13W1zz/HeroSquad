@@ -37,6 +37,26 @@ class Sql2oHeroDaoTest {
         assertEquals(hero, foundHero);
     }
 
+    @Test
+    public void deleteByIdDeletesCorrectHero() throws Exception {
+        Hero hero = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
+        heroDao.addHero(hero);
+        heroDao.deleteHeroById(hero.getId());
+        assertEquals(0,heroDao.getAllHeros().size());
+    }
+
+    @Test
+    public void clearAllHerosClearsAll() throws Exception {
+        Hero hero = new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
+        Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
+        heroDao.addHero(hero);
+        heroDao.addHero(hero1);
+        int daoSize = heroDao.getAllHeros().size();
+        heroDao.deleteAllHeros();
+        assertTrue(daoSize > 0 && daoSize > heroDao.getAllHeros().size());
+
+    }
+
 
     @AfterEach
     void tearDown() {
