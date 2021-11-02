@@ -1,0 +1,25 @@
+{{#partial "metadata"}}{{/partial}}
+{{#partial "content"}}{{/partial}}
+
+<div class="container">
+    <form action="/heros" method="post">
+        <label for="heroName">Hero Name:</label>
+        <input type="text" id="heroName" name="heroName">
+
+        <label for="heroAge">Hero Age:</label>
+        <input type="number" name="heroAge" id="heroName">
+
+        <label for="heroPower">SuperPower:</label>
+        <input type="text" id="heroPower" name="heroPower">
+
+        <label for="heroWeakness">Weakness: </label>
+        <input type="text" id="heroWeakness" name="heroWeakness">
+
+        <label for="avatarUrl">Avatar Url:</label>
+        <input type="text" id="avatarUrl" name="avatarUrl">
+
+        <button type="submit">Add hero</button>
+    </form>
+</div>
+
+{{#partial "footer"}}{{/partial}}

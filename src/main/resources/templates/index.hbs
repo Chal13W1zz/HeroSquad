@@ -1,0 +1,20 @@
+{{#partial "metadata"}}
+{{/partial}}
+{{#partial "content"}}
+{{/partial}}
+
+<h1> List of Super Heros!</h1>
+
+{{#if heros}}
+    {{#each heros}}
+        <img src="{{avatarUrl}}" height="200px" width="200px">
+        <p><a href="/heros/{{id}}">{{heroName}}</a></p>
+    {{/each}}
+{{else}}
+    <p>No Heros Found!</p>
+{{/if}}
+
+{{#partial "footer"}}
+{{/partial}}
+
+{{> "layout.hbs"}}
