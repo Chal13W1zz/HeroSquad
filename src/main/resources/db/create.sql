@@ -6,6 +6,14 @@ CREATE TABLE IF NOT EXISTS heros(
     heroAge INT,
     heroPower VARCHAR,
     heroWeakness VARCHAR,
-    avatarUrl VARCHAR
+    avatarUrl VARCHAR,
+    squadId INT
+);
 
+CREATE TABLE IF NOT EXISTS squads (
+   id int PRIMARY KEY auto_increment,
+   squadName VARCHAR,
+   squadCause VARCHAR,
+   maxSize INT,
+   squadFull BOOLEAN
 );
