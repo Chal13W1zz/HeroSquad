@@ -23,7 +23,7 @@ class Sql2oHeroDaoTest {
 
     @Test
     public void addingHeroSetsId() throws Exception {
-        Hero hero = new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
+        Hero hero = setUpNewHero();
         int originalHeroId = hero.getId();
         heroDao.addHero(hero);
         assertNotEquals(originalHeroId, hero.getId());
@@ -31,7 +31,7 @@ class Sql2oHeroDaoTest {
 
     @Test
     public void existingHeroCanBeFoundById() throws Exception {
-        Hero hero = new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
+        Hero hero = setUpNewHero();
         heroDao.addHero(hero);
         Hero foundHero = heroDao.findHeroById(hero.getId());
         assertEquals(hero, foundHero);
@@ -39,7 +39,7 @@ class Sql2oHeroDaoTest {
 
     @Test
     public void deleteByIdDeletesCorrectHero() throws Exception {
-        Hero hero = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
+        Hero hero = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg",2);
         heroDao.addHero(hero);
         heroDao.deleteHeroById(hero.getId());
         assertEquals(0,heroDao.getAllHeros().size());
@@ -47,14 +47,26 @@ class Sql2oHeroDaoTest {
 
     @Test
     public void clearAllHerosClearsAll() throws Exception {
-        Hero hero = new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
-        Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
+        Hero hero = setUpNewHero();
+        Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg",2);
         heroDao.addHero(hero);
         heroDao.addHero(hero1);
         int daoSize = heroDao.getAllHeros().size();
         heroDao.deleteAllHeros();
         assertTrue(daoSize > 0 && daoSize > heroDao.getAllHeros().size());
+    }
 
+    @Test
+    public void squadIdIsreturnedCorrectly() throws Exception{
+        Hero hero = setUpNewHero();
+        int originalSquadId = hero.getSquadId();
+        heroDao.addHero(hero);
+        assertEquals(originalSquadId,heroDao.findHeroById(hero.getId()).getSquadId());
+    }
+
+    //helper classes
+    public Hero setUpNewHero(){
+        return new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg",1);
     }
 
 
