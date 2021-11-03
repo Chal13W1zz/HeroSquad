@@ -37,4 +37,4 @@ class SquadTest {
     @Test
     void setMaxSize() {
     }
-}
+}   

@@ -20,7 +20,7 @@ class HeroTest {
 
         //helper classes
     public Hero setUpNewHero(){
-        return new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg",1);
+        return new Hero("Ironman",30,"Genius","Swimming",1,"https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
     }
 
 }

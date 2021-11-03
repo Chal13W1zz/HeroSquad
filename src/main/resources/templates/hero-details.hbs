@@ -1,20 +1,16 @@
 {{#partial "metadata"}}{{/partial}}
 {{#partial "content"}}{{/partial}}
 
-<p>Name:</p>
-<p>{{ hero.heroName }}</p>
-<h5>Age:</h5>
-<p> {{ hero.heroAge }}</p>
-<h5>SuperPower:</h5>
-<p> {{ hero.heroPower }}</p>
-<h5>Weakness:</h5>
-<p> {{ hero.heroWeakness }}</p>
+<h1>{{hero.heroName}}</h1>
+<img src="{{hero.avatarUrl}}" height="200px" width="200px">
+<p>Details</p>
+<p>{{hero.heroName}}'s Squad <a href="">{{squad.squadName}}</a> </p>
+<p>Name: {{hero.heroName}}</p>
+<p>Age: {{hero.heroAge}}</p>
+<p>SuperPower: {{hero.heroPower}}</p>
+<p>Weakness: {{hero.heroWeakness}}</p>
+<br>
+<p><a href="/squads/{{hero.squadId}}/heros/{{hero.id}}/delete">Kill {{hero.heroName}}</a> </p>
 
-<h5>Danger Zone:</h5>
-<p>
-    <a class="text-danger" href="/heros/{{hero.id}}/delete">DELETE this task (no undo)</a>
-</p>
 
 {{#partial "footer"}}{{/partial}}
-
-{{> "layout.hbs"}}

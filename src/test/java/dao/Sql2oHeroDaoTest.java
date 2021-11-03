@@ -26,6 +26,7 @@ class Sql2oHeroDaoTest {
         Hero hero = setUpNewHero();
         int originalHeroId = hero.getId();
         heroDao.addHero(hero);
+        System.out.println(heroDao.findHeroById(1).getHeroName());
         assertNotEquals(originalHeroId, hero.getId());
     }
 
@@ -39,7 +40,7 @@ class Sql2oHeroDaoTest {
 
     @Test
     public void deleteByIdDeletesCorrectHero() throws Exception {
-        Hero hero = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg",2);
+        Hero hero = new Hero("Thor",35,"Lightning","Black Widow",2,"https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
         heroDao.addHero(hero);
         heroDao.deleteHeroById(hero.getId());
         assertEquals(0,heroDao.getAllHeros().size());
@@ -48,7 +49,7 @@ class Sql2oHeroDaoTest {
     @Test
     public void clearAllHerosClearsAll() throws Exception {
         Hero hero = setUpNewHero();
-        Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg",2);
+        Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow",2,"https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
         heroDao.addHero(hero);
         heroDao.addHero(hero1);
         int daoSize = heroDao.getAllHeros().size();
@@ -57,7 +58,7 @@ class Sql2oHeroDaoTest {
     }
 
     @Test
-    public void squadIdIsreturnedCorrectly() throws Exception{
+    public void squadIdIsReturnedCorrectly() throws Exception{
         Hero hero = setUpNewHero();
         int originalSquadId = hero.getSquadId();
         heroDao.addHero(hero);
@@ -66,7 +67,7 @@ class Sql2oHeroDaoTest {
 
     //helper classes
     public Hero setUpNewHero(){
-        return new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg",1);
+        return new Hero("Ironman",30,"Genius","Swimming",2,"https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
     }
 
 

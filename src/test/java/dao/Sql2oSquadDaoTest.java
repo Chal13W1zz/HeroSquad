@@ -76,9 +76,9 @@ class Sql2oSquadDaoTest {
         Squad squad = setUpNewSquad();
         squadDao.addSquad(squad);
         int squadId = squad.getId();
-        Hero hero1 = new Hero("Ironman",30,"Genius","Swimming","https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg",squadId);
-        Hero hero2 = new Hero("Thor",35,"Lightning","Black Widow","https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg",squadId);
-        Hero horo3 = new Hero("Captain America",120,"Strength","infinity stones","https://www.animatedtimes.com/wp-content/uploads/2020/07/avengers-endgame-captain-america-mjolnir.jpg",squadId);
+        Hero hero1 = new Hero("Ironman",30,"Genius","Swimming",squadId,"https://www.pixel4k.com/wp-content/uploads/2019/09/ironman_1568055212.jpg");
+        Hero hero2 = new Hero("Thor",35,"Lightning","Black Widow",squadId,"https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
+        Hero horo3 = new Hero("Captain America",120,"Strength","infinity stones",squadId,"https://www.animatedtimes.com/wp-content/uploads/2020/07/avengers-endgame-captain-america-mjolnir.jpg");
         heroDao.addHero(hero1);
         heroDao.addHero(hero2);
 
