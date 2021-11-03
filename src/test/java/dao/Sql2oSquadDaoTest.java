@@ -17,8 +17,8 @@ class Sql2oSquadDaoTest {
 
     @BeforeEach
     void setUp() {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString,"","");
+        String connectionString = "jdbc:postgresql://localhost:5432/hero_test";
+        Sql2o sql2o = new Sql2o(connectionString,"ftm","sparkpass");
         squadDao = new Sql2oSquadDao(sql2o);
         heroDao = new Sql2oHeroDao(sql2o);
         conn = sql2o.open();
@@ -94,6 +94,8 @@ class Sql2oSquadDaoTest {
 
     @AfterEach
     void tearDown() {
+        squadDao.deleteAllSquads();
+        heroDao.deleteAllHeros();
         conn.close();
     }
 }

@@ -15,8 +15,8 @@ class Sql2oHeroDaoTest {
 
     @BeforeEach
     void setUp() {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString,"","");
+        String connectionString = "jdbc:postgresql://localhost:5432/hero_test";
+        Sql2o sql2o = new Sql2o(connectionString,"ftm","sparkpass");
         heroDao = new Sql2oHeroDao(sql2o);
         conn = sql2o.open();
     }
@@ -26,7 +26,7 @@ class Sql2oHeroDaoTest {
         Hero hero = setUpNewHero();
         int originalHeroId = hero.getId();
         heroDao.addHero(hero);
-        System.out.println(heroDao.findHeroById(1).getHeroName());
+       // System.out.println(heroDao.findHeroById(1).getHeroName());
         assertNotEquals(originalHeroId, hero.getId());
     }
 
@@ -73,6 +73,7 @@ class Sql2oHeroDaoTest {
 
     @AfterEach
     void tearDown() {
+        heroDao.deleteAllHeros();
         conn.close();
     }
 }
