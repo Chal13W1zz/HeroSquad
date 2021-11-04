@@ -12,7 +12,7 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         String connectionString = "jdbc:postgresql://localhost:5432/hero";
-        Sql2o sql2o = new Sql2o(connectionString,"ftm","sparkpass");
+        Sql2o sql2o = new Sql2o(connectionString,"moringa","sparkpass");
         Sql2oHeroDao heroDao = new Sql2oHeroDao(sql2o);
         Sql2oSquadDao squadDao = new Sql2oSquadDao(sql2o);
 

@@ -1,20 +1,42 @@
 {{#partial "metadata"}}{{/partial}}
 {{#partial "content"}}{{/partial}}
 
-{{#if heros}}
-    <h1>List Of Super Heros!</h1>
-    <p><a href="/heros/new">Add A New Hero</a> </p>
-    {{#each heros}}
+{{#each squads}}
+    <div class="container">
 
-            <img src="{{avatarUrl}}" height="200px" width="200px">
-            <p><a href="squads/{{squadId}}/heros/{{id}}">Stalk {{heroName}}</a> </p>
+        {{#if heros}}
+            <p><a class="btn btn-outline-primary" href="/heros/new">+ Add New Hero</a> </p>
+            <h1>List Of Super Heros!</h1>
 
-    {{/each}}
+           <div class="">
+               <div class="col row-cols-1 row-cols-md-3 g-4">
+                   <div class="row">
+                       {{#each heros}}
 
-{{else}}
-    <p>Ooops!, Thanos Wiped All heroes :( </p>
-    <p><a href="/heros/new">Add A New Hero</a> </p>
-{{/if}}
+                           <div class="card text-center h-50" style="width: 18rem;">
+                               <h5 class="card-title"> {{heroName}} </h5>
+                               <img src="{{avatarUrl}}" class="card-img-top" alt="...">
+                               <div class="card-body">
+                                   <a href="/squads/{{squadId}}"><p>Hero Squad: {{squadName}}</p></a>
+                               </div>
+                               <div class="card-footer">
+                                   <a href="squads/{{squadId}}/heros/{{id}}" class="btn btn-primary"> Spy On {{heroName}} </a>
+                               </div>
+                           </div>
+
+                       {{/each}}
+                   </div>
+               </div>
+
+           </div>
+        {{else}}
+            <p>Ooops!, Thanos Wiped All heroes :( </p>
+            <p><a href="/heros/new">Add A New Hero</a> </p>
+        {{/if}}
+
+    </div>
+
+{{/each}}
 
 {{#partial "footer"}}{{/partial}}
 
