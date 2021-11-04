@@ -1,0 +1,17 @@
+{{#partial "metadata"}}{{/partial}}
+{{#partial "content"}}{{/partial}}
+
+<h1>{{squad.squadName}}</h1>
+<p>Heros in this squad</p>
+
+<ul>
+    {{#each heros}}
+        <li>
+            <p><a href="/squads/{{squadId}}/heros/{{id}}">{{heroName}}</a> </p>
+        </li>
+    {{/each}}
+</ul>
+
+<a class="text-danger" href="/squads/{{squad.id}}/delete">Delete {{squad.squadName}} </a>
+
+{{#partial "footer"}}{{/partial}}

@@ -1,0 +1,41 @@
+{{#partial "metadata"}}{{/partial}}
+{{#partial "content"}}{{/partial}}
+
+<h2>Create A New Hero</h2>
+
+{{#if squads}}
+
+    <div class="container">
+        <form action="/heros" method="post">
+            <label for="heroName">Hero Name:</label>
+            <input type="text" id="heroName" name="heroName">
+
+            <label for="heroAge">Hero Age:</label>
+            <input type="number" name="heroAge" id="heroName">
+
+            <label for="heroPower">SuperPower:</label>
+            <input type="text" id="heroPower" name="heroPower">
+
+            <label for="heroWeakness">Weakness: </label>
+            <input type="text" id="heroWeakness" name="heroWeakness">
+
+            <label for="avatarUrl">Avatar Url:</label>
+            <input type="text" id="avatarUrl" name="avatarUrl">
+
+            <label for="squadId">Add hero to a squad:</label>
+            <select id="squadId" name="squadId">
+                {{#each squads}}
+                    <option value="{{id}}">{{squadName}}</option>
+                {{/each}}
+            </select>
+
+            <button type="submit">Add hero</button>
+        </form>
+
+        <p>Don't see the correct squad?. <a href="/squads/new">Add a new one.</a> </p>
+    </div>
+{{else}}
+    <h3>You'll need to add a squad before you add a hero <a href="/squads/new">Add a new one.</a>  </h3>
+{{/if}}
+
+{{#partial "footer"}}{{/partial}}

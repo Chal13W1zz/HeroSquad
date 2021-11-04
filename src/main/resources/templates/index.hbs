@@ -1,0 +1,21 @@
+{{#partial "metadata"}}{{/partial}}
+{{#partial "content"}}{{/partial}}
+
+{{#if heros}}
+    <h1>List Of Super Heros!</h1>
+    <p><a href="/heros/new">Add A New Hero</a> </p>
+    {{#each heros}}
+
+            <img src="{{avatarUrl}}" height="200px" width="200px">
+            <p><a href="squads/{{squadId}}/heros/{{id}}">Stalk {{heroName}}</a> </p>
+
+    {{/each}}
+
+{{else}}
+    <p>Ooops!, Thanos Wiped All heroes :( </p>
+    <p><a href="/heros/new">Add A New Hero</a> </p>
+{{/if}}
+
+{{#partial "footer"}}{{/partial}}
+
+{{> "layout.hbs"}}
