@@ -3,12 +3,15 @@
 ### Description
 Hero Squad is a fictional app that allows you to recruit a well-balanced team of superheroes (or any other character-type of your choosing).
 
+### Live Deployment <a href="https://hero--squad.herokuapp.com/"> View Here </a>
 
 ### Live Release
 Live  : <a href="https://github.com/Chal13W1zz/HeroSquad/releases">Download Here</a>
 Run the package using `java -jar HeroSquad<version>.jar`
 
 ## Project Homepage
+![image](https://user-images.githubusercontent.com/60155767/140500479-6833f8c8-ce76-4530-b7f7-cb00ec38a50a.png)
+
 
 
 ## Contributions
@@ -24,11 +27,18 @@ If you'd like to contribute.
 If you find a bug, kindly open an issue <a href="https://github.com/Chal13W1zz/HeroSquad/issues/new">Here</a> .
 If you'd like to request a new function, feel free to do so by opening an issue <a href="https://github.com/Chal13W1zz/HeroSquad/issues/new">Here</a>.
 
-## Cloning and Development setup
-`git clone https://github.com/Chal13W1zz/HeroSquad.git && cd HeroSquad`, then open the project using your favourite IDE
+## Development setup
+#### Cloning and setting up a local development database
+- `git clone https://github.com/Chal13W1zz/HeroSquad.git && cd HeroSquad && psql < drop.sql && psql < create.sql && psql hero < hero.sql`
+- open the project using your favourite IDE
 
-## Clone and Build With Gradle
-`git clone https://github.com/Chal13W1zz/HeroSquad.git && cd HeroSquad && gradle compilejava && cd build/classes/java/main/ && java App`
+NB: use Gradle For development and Maven For Deployment
+
+
+
+## Clone and run With Gradle
+- `git clone https://github.com/Chal13W1zz/HeroSquad.git && cd HeroSquad && gradle run`
+- open http://localhost:4567 on your favourite browser and enjoy :)
 
 
 ## Technologies Used
