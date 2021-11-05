@@ -2,31 +2,29 @@
 {{#partial "content"}}{{/partial}}
 
 {{#each squads}}
-    <div class="container">
+    <div class="container text-center">
 
         {{#if heros}}
+            <h1>Super Heros!</h1>
             <p><a class="btn btn-outline-primary" href="/heros/new">+ Add New Hero</a> </p>
-            <h1>List Of Super Heros!</h1>
 
-           <div class="">
-               <div class="col row-cols-1 row-cols-md-3 g-4">
-                   <div class="row">
+           <div class="d-flex row">
+<!--               <div class="row ">-->
+                   <div class="row justify-content-between">
                        {{#each heros}}
 
-                           <div class="card text-center h-50" style="width: 18rem;">
-                               <h5 class="card-title"> {{heroName}} </h5>
-                               <img src="{{avatarUrl}}" class="card-img-top" alt="...">
+                           <div class="card" style="width: 18rem;">
+                               <h5 class="card-title pt-1"> {{heroName}} </h5>
+                               <img class="card-img-top pt-2" src="{{avatarUrl}}" alt="Card image cap" height="200px" width="200px">
                                <div class="card-body">
-                                   <a href="/squads/{{squadId}}"><p>Hero Squad: {{squadName}}</p></a>
-                               </div>
-                               <div class="card-footer">
+                                   <p class="card-text"><a href="/squads/{{squadId}}">Hero Squad: {{squadName}}</a></p>
                                    <a href="squads/{{squadId}}/heros/{{id}}" class="btn btn-primary"> Spy On {{heroName}} </a>
                                </div>
                            </div>
 
                        {{/each}}
                    </div>
-               </div>
+<!--               </div>-->
 
            </div>
         {{else}}

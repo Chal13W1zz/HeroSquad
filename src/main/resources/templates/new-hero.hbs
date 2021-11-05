@@ -1,26 +1,32 @@
 {{#partial "metadata"}}{{/partial}}
 {{#partial "content"}}{{/partial}}
 
-<h2>Create A New Hero</h2>
+<h2 class="text-center">Create A New Hero</h2>
 
 {{#if squads}}
 
-    <div class="container">
+    <div class="container form-group form-control">
         <form action="/heros" method="post">
-            <label for="heroName">Hero Name:</label>
+            <label class="border border-primary p-2" for="heroName">Hero Name:</label>
             <input type="text" id="heroName" name="heroName">
+            <br>
 
-            <label for="heroAge">Hero Age:</label>
+            <label class="border border-primary p-2" for="heroAge">Hero Age:</label>
             <input type="number" name="heroAge" id="heroName">
+            <br>
 
-            <label for="heroPower">SuperPower:</label>
+            <label class="border border-primary p-2" for="heroPower">SuperPower:</label>
             <input type="text" id="heroPower" name="heroPower">
+            <br>
 
-            <label for="heroWeakness">Weakness: </label>
+            <label class="border border-primary p-2" for="heroWeakness">Weakness: </label>
             <input type="text" id="heroWeakness" name="heroWeakness">
+            <br>
 
-            <label for="avatarUrl">Avatar Url:</label>
+            <label class="border border-primary p-2" for="avatarUrl">Avatar Url:</label>
             <input type="text" id="avatarUrl" name="avatarUrl">
+            <br>
+            <br>
 
             <label for="squadId">Add hero to a squad:</label>
             <select id="squadId" name="squadId">
@@ -28,14 +34,16 @@
                     <option value="{{id}}">{{squadName}}</option>
                 {{/each}}
             </select>
+            <br>
 
-            <button type="submit">Add hero</button>
+            <button class="btn btn-outline-primary" type="submit">Add hero</button>
         </form>
 
-        <p>Don't see the correct squad?. <a href="/squads/new">Add a new one.</a> </p>
     </div>
+    <p class="text-center">Don't see the correct squad?. <a class="btn btn-outline-primary" href="/squads/new">+ Add a new one.</a> </p>
 {{else}}
     <h3>You'll need to add a squad before you add a hero <a href="/squads/new">Add a new one.</a>  </h3>
 {{/if}}
 
 {{#partial "footer"}}{{/partial}}
+{{> "layout.hbs"}}
