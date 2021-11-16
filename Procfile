@@ -1,0 +1,1 @@
+web: java -jar ./target/HeroSquad-1.0-Beta-jar-with-dependencies.jar
