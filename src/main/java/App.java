@@ -10,9 +10,19 @@ import java.util.*;
 
 import static spark.Spark.*;
 public class App {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
+    }
     public static void main(String[] args) {
-        String connectionString = "jdbc:postgresql://localhost:5432/hero";
-        Sql2o sql2o = new Sql2o(connectionString,"moringa","sparkpass");
+        port(getHerokuAssignedPort());
+        staticFileLocation("/public");
+
+        String connectionString = "jdbc:postgresql://ec2-18-210-233-138.compute-1.amazonaws.com:5432/dcusbo64al2pmk";
+        Sql2o sql2o = new Sql2o(connectionString,"kyzdcepzltqodh","7b09db0492c0fed51d36f6f5931bd587e13a6c8eb824707660118eb10b679ace");
         Sql2oHeroDao heroDao = new Sql2oHeroDao(sql2o);
         Sql2oSquadDao squadDao = new Sql2oSquadDao(sql2o);
 
@@ -40,7 +50,6 @@ public class App {
             String squadName = request.queryParams("squadName");
             String squadCause = request.queryParams("squadCause");
             int maxSize = Integer.parseInt(request.queryParams("maxSize"));
-            System.out.println(String.format("%s, %s, %d",squadName,squadCause,maxSize));
             Squad newSquad = new Squad(squadName,squadCause,maxSize);
             squadDao.addSquad(newSquad);
             response.redirect("/");
@@ -56,6 +65,15 @@ public class App {
             return null;
         },new HandlebarsTemplateEngine());
 
+        //delete squad by id
+        get("/squads/:id/delete",(request, response)->{
+            Map<String, Object>model = new HashMap<>();
+            int idOfSquadToDelete = Integer.parseInt(request.params("id"));
+            squadDao.deleteSquadById(idOfSquadToDelete);
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
         //delete all heros
         get("/heros/delete",(request, response)->{
             Map<String,Object>model = new HashMap<>();
@@ -63,8 +81,6 @@ public class App {
             response.redirect("/");
             return null;
         },new HandlebarsTemplateEngine());
-
-
 
         //get a squad and the heros in the squad
         get("/squads/:id",(request,response)->{
@@ -100,15 +116,12 @@ public class App {
             Map<String,Object>model = new HashMap<>();
             String heroName = request.queryParams("heroName");
             int heroAge = Integer.parseInt(request.queryParams("heroAge"));
-            //Hero hero1 = new Hero("Thor",35,"Lightning","Black Widow",1,"https://wallsdesk.com/wp-content/uploads/2016/12/Thor-High-Quality-Wallpapers.jpg");
             String heroPower = request.queryParams("heroPower");
             String heroWeakness = request.queryParams("heroWeakness");
             String avatarUrl = request.queryParams("avatarUrl");
             int squadId = Integer.parseInt(request.queryParams("squadId"));
-            System.out.println(String.format("%s,%d,%s,%s,%d,%s",heroName,heroAge,heroPower,heroWeakness,squadId,avatarUrl));
             Hero newHero = new Hero(heroName,heroAge,heroPower,heroWeakness,squadId,avatarUrl);
             heroDao.addHero(newHero);
-           // heroDao.addHero(hero1);
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -125,7 +138,6 @@ public class App {
             model.put("squads",squadDao.getAllSquads());
             return new ModelAndView(model,"hero-details.hbs");
         },new HandlebarsTemplateEngine());
-
 
     }
 }
