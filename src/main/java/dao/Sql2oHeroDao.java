@@ -13,9 +13,17 @@ public class Sql2oHeroDao implements HeroDao {
     public Sql2oHeroDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
+    public void getDrivers(){
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<Hero> getAllHeros() {
+        getDrivers();
         try(Connection con = sql2o.open()) {
             return con.createQuery("SELECT * FROM heros")
                     .executeAndFetch(Hero.class);
@@ -24,6 +32,7 @@ public class Sql2oHeroDao implements HeroDao {
 
     @Override
     public void addHero(Hero hero) {
+        getDrivers();
         String sql = "INSERT INTO heros (heroName,heroAge,heroPower,heroWeakness,squadId,avatarUrl) VALUES (:heroName,:heroAge,:heroPower,:heroWeakness,:squadId,:avatarUrl)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
@@ -34,11 +43,11 @@ public class Sql2oHeroDao implements HeroDao {
         }catch(Sql2oException e){
             System.out.println(e);
         }
-
     }
 
     @Override
     public Hero findHeroById(int id) {
+        getDrivers();
         try(Connection con = sql2o.open()) {
             return con.createQuery("SELECT * FROM heros WHERE id = :id")
                     .addParameter("id", id)
@@ -48,6 +57,7 @@ public class Sql2oHeroDao implements HeroDao {
 
     @Override
     public void deleteHeroById(int id) {
+        getDrivers();
         String sql = "DELETE FROM heros WHERE id =:id";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
@@ -56,11 +66,11 @@ public class Sql2oHeroDao implements HeroDao {
         }catch (Sql2oException e){
             System.out.println(e);
         }
-
     }
 
     @Override
     public void deleteAllHeros() {
+        getDrivers();
         String sql = "DELETE from heros";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
@@ -68,8 +78,6 @@ public class Sql2oHeroDao implements HeroDao {
         }catch(Sql2oException e){
             System.out.println(e);
         }
-
     }
-
 
 }

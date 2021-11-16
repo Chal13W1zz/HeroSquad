@@ -14,10 +14,18 @@ public class Sql2oSquadDao implements SquadDao{
     public Sql2oSquadDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
+    public void getDrivers(){
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
     public List<Squad> getAllSquads() {
+        getDrivers();
         String sql = "SELECT * FROM squads";
         try(Connection conn = sql2o.open()){
             return conn.createQuery(sql)
@@ -27,6 +35,7 @@ public class Sql2oSquadDao implements SquadDao{
 
     @Override
     public void addSquad(Squad squad) {
+        getDrivers();
         String sql = "INSERT INTO squads (squadName,squadCause,maxSize) VALUES (:squadName, :squadCause, :maxSize)";
         try(Connection conn = sql2o.open()){
             int id = (int) conn.createQuery(sql,true)
@@ -37,11 +46,11 @@ public class Sql2oSquadDao implements SquadDao{
         }catch(Sql2oException e){
             System.out.println(e);
         }
-
     }
 
     @Override
     public Squad findSquadById(int id) {
+        getDrivers();
         String sql = "SELECT * FROM squads WHERE  id = :id";
         try(Connection conn = sql2o.open()){
             return conn.createQuery(sql)
@@ -52,6 +61,7 @@ public class Sql2oSquadDao implements SquadDao{
 
     @Override
     public List<Hero> getAllHerosBySquad(int squadId) {
+        getDrivers();
         try(Connection conn = sql2o.open()){
             return conn.createQuery("SELECT * FROM heros WHERE squadId = :squadId")
                     .addParameter("squadId",squadId)
@@ -61,6 +71,7 @@ public class Sql2oSquadDao implements SquadDao{
 
     @Override
     public void deleteSquadById(int id) {
+        getDrivers();
         String sql = "DELETE FROM squads WHERE id = :id";
         try(Connection conn = sql2o.open()){
             conn.createQuery(sql)
@@ -73,6 +84,7 @@ public class Sql2oSquadDao implements SquadDao{
 
     @Override
     public void deleteAllSquads() {
+        getDrivers();
         String sql = "DELETE FROM squads";
         try(Connection conn = sql2o.open()){
             conn.createQuery(sql)
